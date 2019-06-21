@@ -6,6 +6,7 @@ import store from './store'
 import less from 'less'
 // 引入全部组件
 import Mint from 'mint-ui';
+import "mint-ui/lib/style.css"
 import api from './request/api/index' // 导入api接口
 
 Vue.use(Mint);

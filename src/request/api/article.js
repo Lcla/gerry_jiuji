@@ -16,6 +16,11 @@ const article = {
         return axios.get(`/api/floors/v1?label=0&page=1&random=0`, {                   
         });    
     },
+    // home
+    artHomeTabs (label,random) {
+        return axios.get(`/api/floors/v1?label=${label}&page=1&random=${random}`,{
+        })
+    },
     // post提交    
     login (params) {        
         return axios.post(`${base.sq}/accesstoken`, qs.stringify(params));    

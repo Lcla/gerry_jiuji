@@ -4,11 +4,9 @@
     </div>
 </template>
 <script>
-import Bottom from '../common/Bottom'
 export default {
     name:'Information',
     components:{
-        Bottom
    },
    data(){
        return {

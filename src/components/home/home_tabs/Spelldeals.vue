@@ -1,12 +1,13 @@
 <template>
-    <div class="classify">
-        分类
+    <div class="spelldeals" slot="recommended">
+      拼团购
     </div>
 </template>
 <script>
 export default {
-    name:'Classify',
+    name:'spelldeals',
     components:{
+        
    },
    data(){
        return {
@@ -17,8 +18,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-
+    .spelldeals{
+        margin-top:0.94rem; 
+    }
 </style>
-
-
-

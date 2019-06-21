@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <router-view :inputCommonList='this.common_list' v-if="flag"></router-view>
-    <!-- <Bottom></Bottom> -->
     <div class="bottom" v-if="showpath">
       <ul>
         <li v-for="(item,index) in list" :key="index" @click="btnBottom(index,item.title)">
@@ -14,12 +13,9 @@
 </template>
 
 <script>
-// import Home from './components/home/Home';
-// import Bottom from './components/common/Bottom'
 export default {
   name: "App",
   components: {
-    // Bottom
   },
   data() {
     return {

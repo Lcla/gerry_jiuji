@@ -14,7 +14,10 @@ export default new Router({
     {
       path: '/',
       name: '首页',
-      component: Home
+      component: Home,
+      meta:{
+        keepAlive:false
+      }
     },
     // {
     //   path:'/home',
@@ -29,22 +32,34 @@ export default new Router({
     {
       path:'/classify',
       name:'分类',
-      component:Classify
+      component:Classify,
+      meta:{
+        keepAlive:true //此组件需要被缓存
+      }
     },
     {
       path:'/information',
       name:'消息',
-      component:Information
+      component:Information,
+      meta:{
+        keepAlive:true //此组件需要被缓存
+      }
     },
     {
       path:'/cart',
       name:'购物车',
-      component:Cart
+      component:Cart,
+      meta:{
+        keepAlive:true //此组件需要被缓存
+      }
     },
     {
       path:'/my',
       name:'我的',
-      component:My
+      component:My,
+      meta:{
+        keepAlive:true //此组件需要被缓存
+      }
     }
   ]
 })
