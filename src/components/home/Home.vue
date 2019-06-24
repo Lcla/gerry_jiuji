@@ -1,7 +1,10 @@
 <template>
   <div class="header">
     <div class="home_header">
-      <div class="home_header_top">{{city}}</div>
+      <div class="home_header_top">
+        <span class="r">{{city}}</span>
+        <span>{{searchHints}}</span>
+      </div>
       <div class="home_header_nav">
         <ul>
           <li
@@ -15,13 +18,12 @@
       </div>
     </div>
     <keep-alive>
-        <component v-bind:is="tabView"></component>
+        <component v-bind:is="tabView" :home_list='inputCommonList'></component>
     </keep-alive>
   </div>
 </template>
 <script>
 // import HomeTest from './HomeTest';
-import { InfiniteScroll } from "mint-ui";
 import getCurrentCityName from "../../common_ditu/getUserLocation";
 import select1 from "./home_tabs/Recommended";
 import select2 from "./home_tabs/Limited";
@@ -45,6 +47,7 @@ export default {
     home_header_font: "home_header_font",
     random_one: 0,
     reduce: [],
+    searchHints:""
     };
   },
   props: {
@@ -63,7 +66,7 @@ export default {
     this.home_header_nav = this.inputCommonList.data.data.label;
     this.getUserCity();
     this.random_one = this.$route.query.tabs;
-    
+    this.homeHead();
     console.log(this.random_one);
     console.log(typeof(this.random_one))
   },
@@ -109,8 +112,8 @@ export default {
     },
     navTab(item, index,arr) {
       // console.log(index)
-      console.log(item);
-      console.log(arr)
+      // console.log(item);
+      // console.log(arr)
       this.tabView = arr;
       this.home_header_nav_index = index;
       var random = this.home_header_nav_index + 1;
@@ -131,7 +134,17 @@ export default {
           console.log(err);
         }
       );
-    }
+    },
+      homeHead(){
+          var _this = this;
+            _this.$api.article.homeHead({}).then(res=>{
+                    // console.log(res)
+                    this.searchHints = res.data.data.searchHints[0];
+                    // console.log(this.searchHints)
+                },err=>{
+                    console.log(err)
+                })
+      }
   }
 };
 </script>
@@ -156,6 +169,9 @@ export default {
       padding: 0 0.15rem;
       margin: 0.14rem;
       font-size: 0.18rem;
+      .r{
+        margin-right: 0.4rem;
+      }
     }
     .home_header_nav {
       ul {

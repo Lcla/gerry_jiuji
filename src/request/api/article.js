@@ -8,8 +8,8 @@ import axios from '../http'; // 导入http中创建的axios实例
 
 const article = {    
     // 新闻列表    
-    articleList () {        
-        return axios.get(`${base.sq}/topics`);    
+    homeHead () {        
+        return axios.get(`/api/user/userInfo/v1`);    
     },    
     // bottom   
     articleDetail () {        
