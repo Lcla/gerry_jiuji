@@ -31,14 +31,23 @@
         </div>
     </div>
     <div class="floor" :data-id="common_list.floor[4].title">
-        <span>{{ home_time | formatDate  }} </span>
+        <span>{{ home_time*1 | formatDate  }} </span>
+        <div id="app" v-if="falg">{{`${hr} : ${min} : ${sec}`}}</div>
+        <div id="app" v-if="!falg">已结束</div>
     </div>
   </div>
 </template>
 <script>
+import {formatDate} from '../../../assets/util/date';
 export default {
   name: "recommended",
   components: {
+  },
+  filters: {
+      formatDate(time) {
+          var date = new Date(time);
+          return formatDate(date, 'yyyy-MM-dd hh:mm');
+      }
   },
   data() {
     return {
@@ -46,7 +55,10 @@ export default {
       common_list: [],
       service_list:[],
       college_list:[],
-      home_time:''
+      home_time:'1561425870753',
+      day: 0, hr: 0, min: 0, sec: 0,
+      falg:true,
+      timer: null  // 定时器名称     
     };
   },
   props: {
@@ -61,17 +73,51 @@ export default {
     this.common_list = this.home_list.data.data.container
     this.service_list = this.home_list.data.data.container.floor[2].content
     this.college_list = this.home_list.data.data.container.floor[4].content
-    console.log(this.college_list)
-    
   },
   mounted() {
     this.swipe_list = this.home_list.data.data.container.floor[0].content
-    this.home_time = "1556162941000";
+    this.countdown();
   },
   methods: {
-    
-    
-  }
+    countdown() {
+      // setTimeout
+     this.timer = setTimeout(function () {
+        that.countdown()
+      }, 1000)
+      // 通过$once来监听定时器，在beforeDestroy钩子可以被清除。
+      this.$once('hook:beforeDestroy', () => {            
+          clearInterval(this.timer);     
+      })
+      // clearInterval(this.timer)
+      const end = Date.parse(new Date('2019-06-26 16:48'))
+      // console.log(end)
+      const now = Date.parse(new Date())
+      const msec = end - now
+      let day = parseInt(msec / 1000 / 60 / 60 / 24)
+      let hr = parseInt(msec / 1000 / 60 / 60 % 24)
+      let min = parseInt(msec / 1000 / 60 % 60)
+      let sec = parseInt(msec / 1000 % 60)
+      this.day = day
+      this.hr = hr > 9 ? hr : '0' + hr
+      this.min = min > 9 ? min : '0' + min
+      this.sec = sec > 9 ? sec : '0' + sec
+      const that = this
+      if(msec <= 0){
+        this.falg = false
+        clearInterval(this.timer)
+      }else{
+        this.falg = true
+      }
+      
+    }
+  },
+  beforeDestroy(){
+    clearInterval(this.timer);
+    // console.log(this.timer)  
+    this.timer = null;    
+    }
+
+  // }
 };
 </script>
 <style lang="less" scoped>

@@ -10,7 +10,7 @@
           <li
             v-for="(item,index) in home_header_nav"
             :key="index"
-            @click="navTab(item,index,'select'+(index+1))"
+            @click="navTab(item,index,'select'+(index+1)),navTab_1(item)"
             :class="home_header_nav_index === index ? home_header_font : ''"
             :data-index="index"
           >{{item.title}}</li>
@@ -47,7 +47,9 @@ export default {
     home_header_font: "home_header_font",
     random_one: 0,
     reduce: [],
-    searchHints:""
+    searchHints:"",
+    random:'',
+    label:''
     };
   },
   props: {
@@ -57,46 +59,18 @@ export default {
     },
     required: true
   },
-  created() {},
+  created() {
+  },
   mounted() {
-    // var number = '151531731534113132wdaidojaiwojdiajodija';
-    // console.log('************'+number.substr(-4))
     //    console.log(this.$store.state.showFooter);
     //    console.log(this.$store.state.changableNum);
+    this.navTab_1()
     this.home_header_nav = this.inputCommonList.data.data.label;
     this.getUserCity();
     this.random_one = this.$route.query.tabs;
     this.homeHead();
     console.log(this.random_one);
     console.log(typeof(this.random_one))
-  },
-  updated() {
-    // this.random_one = this.$route.query.tabs;
-    // console.log(this.random_one)
-    // this.random_one = this.$route.query.tabs;
-    // console.log(this.random_one)
-    // // this.reduce =  this.home_header_nav;
-    // for(var i=0;i<this.home_header_nav.length;i++){
-    //     console.log(this.home_header_nav[i])
-    //     this.reduce.push(this.home_header_nav[i].id)
-    // }
-    // console.log(this.reduce[3]);
-    // var random = this.$route.query.tabs;
-    // var label = this.reduce[random];
-    //  this.$api.article.artHomeTabs(label,random,{
-    //         }).then(res => {
-    //             // 执行某些操作
-    //             // console.log(res);
-    //             this.list = res.data.data.tabBar;
-    //             this.common_list = res;
-    //             this.$router.push({path: '/', query: {tabs:random}});
-    //             // console.log(this.common_list)
-    //             this.flag =true;
-    //             },
-    //             function(err) {
-    //             console.log(err);
-    //             }
-    //         );
   },
   methods: {
     getUserCity() {
@@ -135,7 +109,14 @@ export default {
         }
       );
     },
-      homeHead(){
+    navTab_1(item){
+      console.log(item)
+      this.random_one = this.$route.query.tabs;
+        console.log(this.random_one);
+        console.log(typeof(this.random_one))
+      
+    },
+    homeHead(){
           var _this = this;
             _this.$api.article.homeHead({}).then(res=>{
                     // console.log(res)
@@ -163,14 +144,16 @@ export default {
     transition: all 0.2s ease;
     z-index: 1;
     .home_header_top {
-      background: rgba(0, 0, 0, 0.4);
+      background: #fff;
       border-radius: 0.3rem;
       height: 0.34rem;
+      line-height: 0.34rem;
       padding: 0 0.15rem;
       margin: 0.14rem;
       font-size: 0.18rem;
       .r{
-        margin-right: 0.4rem;
+        padding-right: 0.4rem;
+        border-right: 1px solid #ccc;
       }
     }
     .home_header_nav {
