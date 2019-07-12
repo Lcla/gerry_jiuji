@@ -6,6 +6,8 @@ import Classify from '../components/Classify/Classify'
 import Information from '../components/Information/Information'
 import Cart from '../components/Cart/Cart'
 import My from '../components/My/My'
+import Login from '../components/My/login/Login'
+import Register from '../components/My/register/Register'
 Vue.use(Router)
 
 export default new Router({
@@ -60,6 +62,16 @@ export default new Router({
       meta:{
         keepAlive:true //此组件需要被缓存
       }
+    },
+    {
+      path:'/login',
+      name:'Login',
+      component:Login
+    },
+    {
+      path:'/register',
+      name:'Register',
+      component:Register
     }
   ]
 })

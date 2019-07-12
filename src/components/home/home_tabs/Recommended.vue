@@ -32,7 +32,7 @@
     </div>
     <div class="floor" :data-id="common_list.floor[4].title">
         <span>{{ home_time*1 | formatDate  }} </span>
-        <div id="app" v-if="falg">{{`${hr} : ${min} : ${sec}`}}</div>
+        <div id="app" v-if="falg">{{`${day} 天 ${hr} : ${min} : ${sec}`}}</div>
         <div id="app" v-if="!falg">已结束</div>
     </div>
   </div>
@@ -89,7 +89,7 @@ export default {
           clearInterval(this.timer);     
       })
       // clearInterval(this.timer)
-      const end = Date.parse(new Date('2019-06-26 16:48'))
+      const end = Date.parse(new Date('2019-07-15 12:48'))
       // console.log(end)
       const now = Date.parse(new Date())
       const msec = end - now

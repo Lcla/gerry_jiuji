@@ -8,6 +8,7 @@ import less from 'less'
 import mintUI from 'mint-ui'
 import "mint-ui/lib/style.css"
 import api from './request/api/index' // 导入api接口
+import "./assets/iconfont/iconfont.css"; // 引入阿里图标
 import $ from 'jquery'
 //引入手机端可以看到打印出来的数据
 // require('./assets/util/vconsole.js')

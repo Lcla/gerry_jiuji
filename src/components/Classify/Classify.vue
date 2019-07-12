@@ -15,7 +15,16 @@ export default {
       canClick: true  //添加canClick
     };
   },
-  mounted() {},
+   props: {
+    inputCommonList: {
+      type: Object,
+      default: () => {}
+    },
+    required: true
+  },
+  mounted() {
+    console.log(this.inputCommonList)
+  },
   methods: {
     countDown() {
       if (!this.canClick) return   //改动的是这两行代码

@@ -21,9 +21,9 @@ const article = {
         return axios.get(`/api/floors/v1?label=${label}&page=1&random=${random}`,{
         })
     },
-    // post提交    
-    login (params) {        
-        return axios.post(`${base.sq}/accesstoken`, qs.stringify(params));    
+    // my我的    
+    artMy () {        
+        return axios.get(`/api/member/index/v1?v=0.651647111014251`, {});    
     }
     // 其他接口…………
 }

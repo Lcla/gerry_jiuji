@@ -30,6 +30,7 @@ export default {
     };
   },
   created() {
+    // this.getPath()
   },
   mounted() {
     this.onLoad();
@@ -55,6 +56,7 @@ export default {
     },
     btnBottom(index, title) {
       this.btnImg = index;
+      console.log(this)
       // console.log(this.btnImg);
       switch (title) {
         case "首页":

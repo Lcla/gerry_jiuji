@@ -10,7 +10,7 @@
           <li
             v-for="(item,index) in home_header_nav"
             :key="index"
-            @click="navTab(item,index,'select'+(index+1)),navTab_1(item)"
+            @click="navTab(item,index,'select'+(index+1))"
             :class="home_header_nav_index === index ? home_header_font : ''"
             :data-index="index"
           >{{item.title}}</li>
@@ -18,7 +18,7 @@
       </div>
     </div>
     <keep-alive>
-        <component v-bind:is="tabView" :home_list='inputCommonList'></component>
+      <component v-bind:is="tabView" :home_list="inputCommonList"></component>
     </keep-alive>
   </div>
 </template>
@@ -39,17 +39,17 @@ export default {
   },
   data() {
     return {
-    tabView : 'select1',
-    list: [],
-    city: "",
-    home_header_nav: "",
-    home_header_nav_index: 0,
-    home_header_font: "home_header_font",
-    random_one: 0,
-    reduce: [],
-    searchHints:"",
-    random:'',
-    label:''
+      tabView: "select1",
+      list: [],
+      city: "",
+      home_header_nav: "",
+      home_header_nav_index: 0,
+      home_header_font: "home_header_font",
+      random_one: 0,
+      reduce: [],
+      searchHints: "",
+      random: "",
+      label: ""
     };
   },
   props: {
@@ -59,32 +59,26 @@ export default {
     },
     required: true
   },
-  created() {
-  },
+  created() {},
   mounted() {
     //    console.log(this.$store.state.showFooter);
     //    console.log(this.$store.state.changableNum);
-    this.navTab_1()
     this.home_header_nav = this.inputCommonList.data.data.label;
     this.getUserCity();
     this.random_one = this.$route.query.tabs;
     this.homeHead();
     console.log(this.random_one);
-    console.log(typeof(this.random_one))
+    console.log(typeof this.random_one);
   },
   methods: {
+    // 百度地图获取地址
     getUserCity() {
-      //   console.log(getCurrentCityName)
       this.$store.state.city ||
         getCurrentCityName().then(city => {
-          //   console.log(city)
           this.city = city;
-          //   city = city.slice(0,city.length -1)
-          //   console.log(city)
-          //   this.$store.commit('getCity',city)
         });
     },
-    navTab(item, index,arr) {
+    navTab(item, index, arr) {
       // console.log(index)
       // console.log(item);
       // console.log(arr)
@@ -109,23 +103,19 @@ export default {
         }
       );
     },
-    navTab_1(item){
-      console.log(item)
-      this.random_one = this.$route.query.tabs;
-        console.log(this.random_one);
-        console.log(typeof(this.random_one))
-      
-    },
-    homeHead(){
-          var _this = this;
-            _this.$api.article.homeHead({}).then(res=>{
-                    // console.log(res)
-                    this.searchHints = res.data.data.searchHints[0];
-                    // console.log(this.searchHints)
-                },err=>{
-                    console.log(err)
-                })
-      }
+    homeHead() {
+      var _this = this;
+      _this.$api.article.homeHead({}).then(
+        res => {
+          // console.log(res)
+          this.searchHints = res.data.data.searchHints[0];
+          // console.log(this.searchHints)
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
   }
 };
 </script>
@@ -151,7 +141,7 @@ export default {
       padding: 0 0.15rem;
       margin: 0.14rem;
       font-size: 0.18rem;
-      .r{
+      .r {
         padding-right: 0.4rem;
         border-right: 1px solid #ccc;
       }
