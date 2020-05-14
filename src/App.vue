@@ -1,21 +1,15 @@
 <template>
   <div id="app">
     <router-view :inputCommonList='this.common_list' v-if="flag"></router-view>
-    <div class="bottom" v-if="showpath">
-      <ul>
-        <li v-for="(item,index) in list" :key="index" @click="btnBottom(index,item.title)">
-          <img :src="item.title===isShow ? item.imagePath[1]:item.imagePath[0]" alt>
-          <div class="bottom_character" :class="item.title===isShow ? bottom_color:''">{{item.title}}</div>
-        </li>
-      </ul>
-    </div>
+    <Bottom></Bottom>
   </div>
 </template>
-
 <script>
+import Bottom from '../src/components/common/Bottom.vue'
 export default {
   name: "App",
   components: {
+    Bottom
   },
   data() {
     return {
@@ -54,49 +48,21 @@ export default {
         }
       );
     },
-    btnBottom(index, title) {
-      this.btnImg = index;
-      console.log(this)
-      // console.log(this.btnImg);
-      switch (title) {
-        case "首页":
-          this.$router.push("/");
-          break;
-        case "分类":
-          this.$router.push("/classify");
-          break;
-        case "消息":
-          this.$router.push("/information");
-          break;
-        case "购物车":
-          this.$router.push("/cart");
-          break;
-        case "我的":
-          this.$router.push("/my");
-          break;
-      }
-      // if(index === 0 ){
-      //     this.$router.push({name:'Home'})
-      // }else if(index === 1 ){
-      //     this.$router.push({name:'Classify'})
-      // }else if(index === 2 ){
-      //     this.$router.push({name:'Information'})
-      // }else if(index === 3 ){
-      //     this.$router.push({name:'Cart'})
-      // }else if(index === 4 ){
-      //     this.$router.push({name:'My'})
-      // }
-    }
   }
 };
 </script>
 
 <style lang="less" scoped>
+#app{
+  margin-bottom: 45.6px;
+}
 .bottom {
   width: 100%;
   position: fixed;
   bottom: 0;
   left: 0;
+  background: #FFFFFF;
+  height: 45.6px;
   ul {
     display: flex;
     justify-content: space-around;

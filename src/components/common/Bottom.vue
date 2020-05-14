@@ -1,11 +1,11 @@
 <template>
     <div class="bottom">
         <ul>
-            <li v-for="(item,index) in list" :key="index" @click="btnBottom(index,item.title)">
-                <img :src="btnImg===index ? item.imagePath[1]:item.imagePath[0]" alt="">
-                <div class="bottom_character" :class="btnImg===index ? bottom_color:''">
-                    {{item.title}}                    
-                </div>
+            <li v-for="(item,index) in list" :key="index" @click="btnBottom(index,item.title)" >
+                    <img :src="btnTitle===item.title ? item.imagePath[1]:item.imagePath[0]" alt="" >
+                    <div class="bottom_character" :class="btnTitle===item.title ? bottom_color:''">
+                        {{item.title}}                    
+                    </div>
             </li>
         </ul>
     </div>
@@ -15,12 +15,15 @@ export default {
     data(){
         return {
             list:[],
-            btnImg:0,
-            bottom_color:'bottom_color'
+            bottom_color:'bottom_color',
+            tabsIndex:0,
+            btnTitle:'',
             }
     },
     created(){
-        
+       if(window.location.pathname==this.$router.history.current.path){
+            this.btnTitle=this.$router.history.current.name;
+        }  
     },
     mounted(){
         this.onLoad();
@@ -33,19 +36,15 @@ export default {
             _this.$api.article.articleDetail( {        
             }).then(res=> {
                 // 执行某些操作   
-                console.log(res) 
                 _this.list = res.data.data.tabBar;  
             },function (err){
                 console.log(err)
             })    
         },  
         btnBottom(index,title){
-            console.log(index)
-            this.btnImg = index;
-            console.log(title)
-            console.log(this.btnImg)
+            this.btnTitle = title;
             switch(title){
-                case '首页': this.$router.push('/home');
+                case '首页': this.$router.push('/');
                 break;
                 case '分类': this.$router.push('/classify');
                 break;
@@ -56,17 +55,6 @@ export default {
                 case '我的': this.$router.push('/my');
                 break;
             }
-            // if(index === 0 ){
-            //     this.$router.push({name:'Home'})
-            // }else if(index === 1 ){
-            //     this.$router.push({name:'Classify'})
-            // }else if(index === 2 ){
-            //     this.$router.push({name:'Information'})
-            // }else if(index === 3 ){
-            //     this.$router.push({name:'Cart'})
-            // }else if(index === 4 ){
-            //     this.$router.push({name:'My'})
-            // }
         }
     }
 }

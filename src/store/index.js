@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import axios from 'axios';
 import Vuex from 'vuex';
 Vue.use(Vuex);
 const state = {//要设置的全局访问的state对象
@@ -32,7 +31,8 @@ const getters = {
 };
 const store = new Vuex.Store({
     state:{
-        data:[]
+        data:[],
+        changableNum:0
     },
     getters
 });

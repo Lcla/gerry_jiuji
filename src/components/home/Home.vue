@@ -49,7 +49,8 @@ export default {
       reduce: [],
       searchHints: "",
       random: "",
-      label: ""
+      label: "",
+      
     };
   },
   props: {
@@ -66,9 +67,8 @@ export default {
     this.home_header_nav = this.inputCommonList.data.data.label;
     this.getUserCity();
     this.random_one = this.$route.query.tabs;
-    this.homeHead();
     console.log(this.random_one);
-    console.log(typeof this.random_one);
+    this.homeHead();
   },
   methods: {
     // 百度地图获取地址
@@ -79,23 +79,16 @@ export default {
         });
     },
     navTab(item, index, arr) {
-      // console.log(index)
-      // console.log(item);
-      // console.log(arr)
       this.tabView = arr;
       this.home_header_nav_index = index;
       var random = this.home_header_nav_index + 1;
       var label = item.id;
-      // console.log(random)
-
       this.$api.article.artHomeTabs(label, random, {}).then(
         res => {
           // 执行某些操作
-          // console.log(res);
           this.list = res.data.data.tabBar;
           this.common_list = res;
           this.$router.push({ path: "/", query: { tabs: random } });
-          // console.log(this.common_list)
           this.flag = true;
         },
         function(err) {

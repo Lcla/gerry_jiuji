@@ -4,12 +4,16 @@ import App from './App'
 import router from './router'
 import store from './store'
 import less from 'less'
+import AMap from 'AMap'
 // 引入全部组件
 import mintUI from 'mint-ui'
 import "mint-ui/lib/style.css"
 import api from './request/api/index' // 导入api接口
 import "./assets/iconfont/iconfont.css"; // 引入阿里图标
 import $ from 'jquery'
+import Vant from 'vant';
+import 'vant/lib/index.css';
+Vue.use(Vant)
 //引入手机端可以看到打印出来的数据
 // require('./assets/util/vconsole.js')
 // import formatDate from './assets/util/formatDate'

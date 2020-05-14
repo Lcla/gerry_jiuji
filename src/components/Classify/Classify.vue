@@ -2,6 +2,7 @@
   <div class="classify">
     分类
     <button class="button" :class="{disabled: !this.canClick}" @click="countDown">{{content}}</button>
+    <span>{{this.$store.state.changableNum}}</span>
   </div>
 </template>
 <script>
@@ -12,7 +13,7 @@ export default {
     return {
       content: "发送验证码", // 按钮里显示的内容
       totalTime: 10, //记录具体倒计时时间
-      canClick: true  //添加canClick
+      canClick: true , //添加canClick
     };
   },
    props: {
@@ -22,28 +23,35 @@ export default {
     },
     required: true
   },
+  created(){
+    
+    
+  },
   mounted() {
     console.log(this.inputCommonList)
+    console.log(this.$store.state.changableNum);
+    
   },
   methods: {
     countDown() {
       if (!this.canClick) return   //改动的是这两行代码
-  this.canClick = false
-  this.content = this.totalTime + 's后重新发送'
-  let clock = window.setInterval(() => {
-    this.totalTime--
-    this.content = this.totalTime + 's后重新发送'
-      console.log(666)
-    if (this.totalTime < 0) {
-        console.log(999)
-        console.log(clock)
-      window.clearInterval(clock)
-      this.content = '重新发送验证码'
-      this.totalTime = 10
-      this.canClick = true   //这里重新开启
+        this.canClick = false
+        this.content = this.totalTime + 's后重新发送'
+        let clock = window.setInterval(() => {
+          this.totalTime--
+          this.content = this.totalTime + 's后重新发送'
+            console.log(666)
+          if (this.totalTime < 0) {
+              console.log(999)
+              console.log(clock)
+            window.clearInterval(clock)
+            this.content = '重新发送验证码'
+            this.totalTime = 10
+            this.canClick = true   //这里重新开启
+          }
+            }, 1000);
     }
-      }, 1000);
-    }
+
   }
 };
 </script>
